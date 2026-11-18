@@ -1,112 +1,323 @@
 @import 'tailwindcss';
 @custom-variant dark (&:where(.dark, .dark *));
 
+/*
+ * True North Plumbing — "Service van and job ticket".
+ * Navy livery panels, safety-orange reflective chevrons, copper pipe runs, brass valve tags and
+ * carbon-copy job tickets on blueprint-grid paper. Every colour starts here as a token.
+ */
 :root {
-  --bg: #f7f8fa;
+  --paper: #f3f0e8;
   --surface: #ffffff;
-  --text: #172033;
-  --muted: #526078;
-  --accent: #2457a7;
-  --accent-ink: #2457a7;
-  --on-accent: #ffffff;
-  --line: #c7cfdb;
-  --focus: #2457a7;
+  --ink: #0e1b2e;
+  --muted: #4a5872;
+  --primary: #16305a;
+  --primary-hover: #0f2445;
+  --on-primary: #ffffff;
+  --panel: #16305a;
+  --panel-2: #1d3a6a;
+  --panel-ink: #f3f0e8;
+  --panel-muted: #b8c5da;
+  --safety: #f26a1b;
+  --on-safety: #0e1b2e;
+  --stamp: #c9400a;
+  --copper: #b4672b;
+  --copper-hi: #e8a974;
+  --brass: #c9a24a;
+  --brass-deep: #8f6f25;
+  --tag-ink: #2a1f08;
+  --steel: #8b97a8;
+  --grid: #dde1e8;
+  --line: #c8ced8;
+  --outline: #0e1b2e;
+  --water: #2f7bd8;
+  --pex-red: #c8372d;
+  --ticket: #fffdf7;
+  --rule: #dfe7f2;
+  --link: #16305a;
+  --focus: #c2410c;
+  --sky: #cfe0f2;
+  --snow: #ffffff;
+  --concrete: #e6e1d5;
+  --dial-face: #fffdf7;
+  --reflect: #ffffff;
+  --shadow: rgb(14 27 46 / .16);
   --map-filter: none;
   color-scheme: light;
 }
+/* "Van cab at night": the same materials under dash light, not an inverted palette. */
 @media (prefers-color-scheme: dark) {
- :root:not(.light) {
-  --bg: #141923;
-  --surface: #1e2633;
-  --text: #f1f5fa;
-  --muted: #b5c2d5;
-  --accent: #2457a7;
-  --accent-ink: #a9cbff;
-  --on-accent: #ffffff;
-  --line: #61708a;
-  --focus: #a9cbff;
-  --map-filter: grayscale(.4) brightness(.8);
-  color-scheme: dark;
- }
+  :root:not(.light) {
+    --paper: #0a1424;
+    --surface: #112038;
+    --ink: #e8eef6;
+    --muted: #a3b0c4;
+    --primary: #2c5ba3;
+    --primary-hover: #3768b5;
+    --on-primary: #ffffff;
+    --panel: #0f1e38;
+    --panel-2: #152a4c;
+    --panel-ink: #e8eef6;
+    --panel-muted: #a3b0c4;
+    --safety: #ff7a2b;
+    --on-safety: #0a1424;
+    --stamp: #ff7a2b;
+    --copper: #d0864a;
+    --copper-hi: #f2bd8c;
+    --brass: #d9b865;
+    --brass-deep: #a88a3e;
+    --tag-ink: #2a1f08;
+    --steel: #5f6e86;
+    --grid: #142540;
+    --line: #24395b;
+    --outline: #93a6c2;
+    --water: #5fa0f0;
+    --pex-red: #e5594e;
+    --ticket: #13243f;
+    --rule: #22395f;
+    --link: #9cc0f5;
+    --focus: #ff9a5c;
+    --sky: #0e2244;
+    --snow: #c9d6e8;
+    --concrete: #13223a;
+    --dial-face: #dce3ee;
+    --reflect: #dfe5ee;
+    --shadow: rgb(0 0 0 / .45);
+    --map-filter: grayscale(.4) brightness(.8);
+    color-scheme: dark;
+  }
 }
 :root.dark {
-  --bg: #141923;
-  --surface: #1e2633;
-  --text: #f1f5fa;
-  --muted: #b5c2d5;
-  --accent: #2457a7;
-  --accent-ink: #a9cbff;
-  --on-accent: #ffffff;
-  --line: #61708a;
-  --focus: #a9cbff;
+  --paper: #0a1424;
+  --surface: #112038;
+  --ink: #e8eef6;
+  --muted: #a3b0c4;
+  --primary: #2c5ba3;
+  --primary-hover: #3768b5;
+  --on-primary: #ffffff;
+  --panel: #0f1e38;
+  --panel-2: #152a4c;
+  --panel-ink: #e8eef6;
+  --panel-muted: #a3b0c4;
+  --safety: #ff7a2b;
+  --on-safety: #0a1424;
+  --stamp: #ff7a2b;
+  --copper: #d0864a;
+  --copper-hi: #f2bd8c;
+  --brass: #d9b865;
+  --brass-deep: #a88a3e;
+  --tag-ink: #2a1f08;
+  --steel: #5f6e86;
+  --grid: #142540;
+  --line: #24395b;
+  --outline: #93a6c2;
+  --water: #5fa0f0;
+  --pex-red: #e5594e;
+  --ticket: #13243f;
+  --rule: #22395f;
+  --link: #9cc0f5;
+  --focus: #ff9a5c;
+  --sky: #0e2244;
+  --snow: #c9d6e8;
+  --concrete: #13223a;
+  --dial-face: #dce3ee;
+  --reflect: #dfe5ee;
+  --shadow: rgb(0 0 0 / .45);
   --map-filter: grayscale(.4) brightness(.8);
   color-scheme: dark;
 }
 
 @theme {
   --color-*: initial;
-  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --radius-ui: .375rem;
+  --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-sans: "Atkinson Hyperlegible", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Overpass Mono", ui-monospace, monospace;
+  --radius-ui: 2px;
+  --color-white: #ffffff;
+  --color-transparent: transparent;
 }
 @theme inline {
-  --color-bg: var(--bg);
+  --color-paper: var(--paper);
   --color-surface: var(--surface);
-  --color-ink: var(--text);
+  --color-ink: var(--ink);
   --color-muted: var(--muted);
-  --color-accent: var(--accent);
-  --color-accent-ink: var(--accent-ink);
-  --color-on-accent: var(--on-accent);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-on-primary: var(--on-primary);
+  --color-panel: var(--panel);
+  --color-panel-2: var(--panel-2);
+  --color-panel-ink: var(--panel-ink);
+  --color-panel-muted: var(--panel-muted);
+  --color-safety: var(--safety);
+  --color-on-safety: var(--on-safety);
+  --color-stamp: var(--stamp);
+  --color-copper: var(--copper);
+  --color-copper-hi: var(--copper-hi);
+  --color-brass: var(--brass);
+  --color-brass-deep: var(--brass-deep);
+  --color-tag-ink: var(--tag-ink);
+  --color-steel: var(--steel);
+  --color-grid: var(--grid);
   --color-line: var(--line);
+  --color-outline: var(--outline);
+  --color-water: var(--water);
+  --color-pex-red: var(--pex-red);
+  --color-ticket: var(--ticket);
+  --color-rule: var(--rule);
+  --color-link: var(--link);
+  --color-sky: var(--sky);
+  --color-snow: var(--snow);
+  --color-concrete: var(--concrete);
+  --color-dial-face: var(--dial-face);
+  --color-reflect: var(--reflect);
 }
 :root {
-  --measure: 42rem;
+  --measure: 40rem;
+  --behind: var(--paper);
   --jamstacks-font-family: var(--font-sans);
-  --jamstacks-color-text: var(--text);
-  --jamstacks-color-background: var(--surface);
-  --jamstacks-color-primary: var(--accent);
+  --jamstacks-color-text: var(--ink);
+  --jamstacks-color-background: var(--ticket);
+  --jamstacks-color-primary: var(--primary);
   --jamstacks-color-border: var(--line);
   --jamstacks-color-muted: var(--muted);
-  --jamstacks-color-link: var(--accent-ink);
+  --jamstacks-color-link: var(--link);
   --jamstacks-border-radius: var(--radius-ui);
-  --jamstacks-control-height: 2.75rem;
+  --jamstacks-control-height: 2.9rem;
   --jamstacks-spacing: 1rem;
   --jamstacks-form-max-width: 40rem;
-  --jamstacks-toggle-color: var(--text);
-  --jamstacks-toggle-dark-color: var(--text);
+  --jamstacks-toggle-color: var(--ink);
+  --jamstacks-toggle-dark-color: var(--ink);
   --jamstacks-toggle-border: var(--line);
   --jamstacks-toggle-background: var(--surface);
   --jamstacks-toggle-dark-background: var(--surface);
   --jamstacks-toggle-focus-color: var(--focus);
 }
+
 @layer base {
-  html { background: var(--bg); color: var(--text); font-family: var(--font-sans); scroll-padding-top: 1.5rem; }
-  body { margin: 0; line-height: 1.6; }
-  main { min-height: 65vh; }
-  a { text-underline-offset: .2em; }
-  a:hover { text-decoration: underline; }
+  html { background: var(--paper); color: var(--ink); font-family: var(--font-sans); scroll-padding-top: 5rem; }
+  body { margin: 0; line-height: 1.6; font-size: 1.0625rem; -webkit-font-smoothing: antialiased; background: var(--paper); }
+  main { min-height: 65vh; display: block; }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 800; line-height: .95; text-transform: uppercase; letter-spacing: .01em; text-wrap: balance; }
+  a { color: var(--link); text-underline-offset: .2em; }
   button { cursor: pointer; }
-  :focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
-  [aria-current="page"] { text-decoration: underline; }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+  ::selection { background: var(--safety); color: var(--on-safety); }
 }
-@utility wrap { width: min(100% - 2rem, 72rem); margin-inline: auto; }
+
+@utility wrap { width: min(100% - 2rem, 76rem); margin-inline: auto; }
+@utility font-display { font-family: var(--font-display); }
+@utility font-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
 @layer components {
-  .button { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; padding: .6rem 1.2rem; border: 1px solid var(--accent); border-radius: var(--radius-ui); background: var(--accent); color: var(--on-accent); font-weight: 600; text-decoration: none; }
-  .button:hover { text-decoration: underline; }
-  .button-quiet { background: var(--surface); color: var(--accent-ink); border-color: var(--line); }
-  .text-link { color: var(--accent-ink); text-decoration: underline; }
-  .eyebrow { font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
-  .skip-link { position: absolute; left: 1rem; top: -8rem; padding: .75rem; z-index: 200; background: var(--surface); }
+  /* Buttons: square, stencilled, with a darker kick plate like a van step. */
+  .button { display: inline-flex; align-items: center; justify-content: center; gap: .55rem; min-height: 3rem; padding: .55rem 1.3rem; border: 2px solid var(--primary); border-bottom-width: 5px; border-bottom-color: var(--primary-hover); border-radius: var(--radius-ui); background: var(--primary); color: var(--on-primary); font-family: var(--font-display); font-size: 1.2rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; line-height: 1; transition: transform .15s, background .15s; }
+  .button:hover { background: var(--primary-hover); }
+  .button:active { transform: translateY(2px); }
+  .button-safety { background: var(--safety); border-color: var(--on-safety); color: var(--on-safety); }
+  .button-safety:hover { background: var(--safety); text-decoration: underline; }
+  .button-quiet { background: transparent; color: var(--ink); border-color: var(--ink); border-bottom-color: var(--ink); }
+  .button-quiet:hover { background: var(--surface); }
+  .on-panel .button-quiet { color: var(--panel-ink); border-color: var(--panel-ink); }
+  .on-panel .button-quiet:hover { background: var(--panel-2); }
+  .text-link { color: var(--link); text-decoration: underline; text-decoration-thickness: 2px; }
+  .on-panel { color: var(--panel-ink); --link: var(--panel-ink); --behind: var(--panel); }
+  .on-panel :focus-visible { outline-color: var(--safety); }
+
+  /* Stencil eyebrow: condensed caps with a short orange rule. */
+  .eyebrow { display: inline-flex; align-items: center; gap: .6rem; font-family: var(--font-display); font-size: 1rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+  .eyebrow::before { content: ''; width: 1.6rem; height: 4px; background: var(--safety); }
+  .on-panel .eyebrow { color: var(--panel-muted); }
+
+  .skip-link { position: absolute; left: 1rem; top: -8rem; padding: .75rem 1rem; z-index: 200; background: var(--safety); color: var(--on-safety); font-weight: 700; }
   .skip-link:focus { top: 1rem; }
+
+  /* Textures */
+  .blueprint { background-color: var(--paper); background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+      linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px; background-position: -1px -1px; }
+  .blueprint-faint { background-image: linear-gradient(color-mix(in srgb, var(--grid) 55%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--grid) 55%, transparent) 1px, transparent 1px); background-size: 24px 24px; }
+  .livery { background-color: var(--panel); color: var(--panel-ink); background-image:
+      linear-gradient(180deg, rgb(255 255 255 / .05) 0 2px, transparent 2px),
+      repeating-linear-gradient(90deg, transparent 0 239px, rgb(255 255 255 / .035) 239px 240px); }
+  /* Rear-door reflective chevrons: two diagonal halves meeting in a point. */
+  .chevrons { background:
+      repeating-linear-gradient(-45deg, var(--safety) 0 16px, var(--reflect) 16px 32px) left / 50.05% 100% no-repeat,
+      repeating-linear-gradient(45deg, var(--safety) 0 16px, var(--reflect) 16px 32px) right / 50% 100% no-repeat; }
+  .hazard { background: repeating-linear-gradient(-45deg, var(--safety) 0 10px, var(--on-safety) 10px 20px); }
+
+  /* Copper pipe band, used horizontally (pipe-h) and vertically (pipe-v). */
+  .pipe-h { height: 16px; background: linear-gradient(180deg, var(--copper-hi) 0 3px, var(--copper) 3px 100%); border-block: 2px solid var(--outline); }
+  .pipe-v { width: 16px; background: linear-gradient(90deg, var(--copper-hi) 0 3px, var(--copper) 3px 100%); border-inline: 2px solid var(--outline); }
+
+  /* Carbon-copy job ticket with a perforated top edge. Set --behind to the colour behind it. */
+  .ticket { position: relative; background-color: var(--ticket); color: var(--ink); --link: var(--primary);
+    background-image: linear-gradient(90deg, transparent 2.25rem, color-mix(in srgb, var(--pex-red) 35%, transparent) 2.25rem calc(2.25rem + 1px), transparent calc(2.25rem + 1px));
+    border: 2px solid var(--outline); box-shadow: 8px 10px 0 var(--shadow); }
+  .dark .ticket, .ticket:where(.dark *) { --link: #9cc0f5; }
+  .ticket::before { content: ''; position: absolute; left: -2px; right: -2px; top: -9px; height: 16px;
+    background: radial-gradient(circle at 8px 8px, var(--behind) 5px, transparent 5.5px) 0 0 / 18px 16px repeat-x; }
+  .ticket-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; border-bottom: 2px solid var(--outline); padding: 1.1rem 1.25rem .6rem; font-family: var(--font-mono); font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .stamp { display: inline-block; padding: .2rem .7rem; border: 4px double var(--stamp); color: var(--stamp); font-family: var(--font-display); font-weight: 800; font-size: 1.6rem; letter-spacing: .12em; line-height: 1; text-transform: uppercase; transform: rotate(-9deg); opacity: .88; mix-blend-mode: multiply; }
+  .dark .stamp, .stamp:where(.dark *) { mix-blend-mode: normal; }
+
+  /* Brass valve tag: stamped disc with a punched hole, hanging on a chain. */
+  .valve-tag { position: relative; display: grid; place-items: center; align-content: center; gap: .15rem; width: 9.5rem; aspect-ratio: 1; border-radius: 50%; padding: 1.6rem .9rem .9rem; text-align: center; color: var(--tag-ink); text-decoration: none;
+    background: radial-gradient(circle at 34% 30%, color-mix(in srgb, var(--brass) 70%, white) 0 18%, var(--brass) 48%);
+    border: 2px solid var(--outline); box-shadow: inset 0 0 0 6px var(--brass), inset 0 0 0 7.5px var(--brass-deep), 5px 7px 0 var(--shadow); }
+  .valve-tag::before { content: ''; position: absolute; top: .6rem; left: 50%; width: .85rem; height: .85rem; translate: -50% 0; border-radius: 50%; background: var(--behind); border: 2px solid var(--outline); }
+  .chain { width: 6px; background: repeating-linear-gradient(180deg, var(--steel) 0 6px, transparent 6px 8px, var(--steel) 8px 10px, transparent 10px 12px); border-inline: 1px solid var(--outline); }
+  .swing { transform-origin: 50% 0; transition: transform .5s cubic-bezier(.3, 1.6, .5, 1); }
+  .swing:hover, .swing:focus-within { transform: rotate(-4deg); }
+  .swing:nth-child(even):hover, .swing:nth-child(even):focus-within { transform: rotate(4deg); }
+
+  /* Highway-style town sign. */
+  .road-sign { display: inline-grid; gap: .1rem; padding: .55rem 1rem .6rem; min-width: 9rem; background: var(--primary); color: #fff; border-radius: 6px; box-shadow: inset 0 0 0 3px var(--primary), inset 0 0 0 5px #fff; font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+  .dark .road-sign, .road-sign:where(.dark *) { box-shadow: inset 0 0 0 3px var(--primary), inset 0 0 0 5px #e8eef6; }
+  .mile-plate { display: inline-block; margin-top: -2px; padding: .15rem .6rem; background: var(--safety); color: var(--on-safety); font-family: var(--font-mono); font-weight: 700; font-size: .9rem; border: 2px solid var(--on-safety); border-top: 0; }
+
+  .beacon { position: relative; display: inline-block; width: .8rem; height: .8rem; border-radius: 50%; background: #fff3b0; border: 2px solid var(--on-safety); box-shadow: 0 0 0 0 rgb(255 243 176 / .9); animation: beacon 1.6s ease-out infinite; }
+  .reveal { animation: reveal .7s both ease-out; animation-timeline: view(); animation-range: entry 0% entry 40%; }
+  .wrench-turn { transition: transform .25s; }
+  details[open] .wrench-turn { transform: rotate(90deg); }
+  details > summary { list-style: none; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
 }
+
+@keyframes beacon {
+  0% { box-shadow: 0 0 0 0 rgb(255 243 176 / .9); }
+  80%, 100% { box-shadow: 0 0 0 .7rem rgb(255 243 176 / 0); }
+}
+@keyframes reveal { from { opacity: 0; translate: 0 1.5rem; } to { opacity: 1; translate: 0 0; } }
+@keyframes drip { 0%, 40% { transform: translateY(0) scale(.4); opacity: 0; } 50% { transform: translateY(0) scale(1); opacity: 1; } 95% { transform: translateY(150px); opacity: 1; } 100% { transform: translateY(150px); opacity: 0; } }
+@keyframes flame { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(.82); } }
+.drip { animation: drip 2.8s ease-in infinite; transform-box: fill-box; transform-origin: center; }
+.flame { animation: flame 1.2s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 100%; }
+.needle { transition: transform .9s cubic-bezier(.34, 1.45, .55, 1); transform-box: view-box; }
+
 .map iframe { width: 100%; min-height: 20rem; border: 0; filter: var(--map-filter); }
+.hero-art-light { display: block; }
+.hero-art-dark { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) .hero-art-light { display: none; }
+  :root:not(.light) .hero-art-dark { display: block; }
+}
+:root.dark .hero-art-light { display: none; }
+:root.dark .hero-art-dark { display: block; }
 .enquiry__host { display: block; }
 .enquiry__status { margin-top: 1rem; color: var(--muted); }
 .enquiry[data-state="present"] > .enquiry__status { display: none; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .reveal { opacity: 1 !important; translate: none !important; }
 }
 @media print {
-  nav, .skip-link, .enquiry, button { display: none !important; }
-  html { background: white; color: black; }
+  nav, .skip-link, .enquiry, button, .no-print, .emergency-bar, svg[aria-hidden="true"] { display: none !important; }
+  html, body, .blueprint, .livery, .ticket, .on-panel { background: white !important; color: black !important; box-shadow: none !important; }
+  .ticket { border: 1px solid black; }
+  .ticket::before { display: none; }
+  .print-phone { display: block !important; }
   a { color: inherit; }
+  h1, h2, h3 { color: black !important; }
 }

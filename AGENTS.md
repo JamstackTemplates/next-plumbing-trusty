@@ -72,3 +72,15 @@ and Pages never import/read it. Keep site.config.json, the form and workflow out
 light/dark captures after a fresh normal build and run node --test jamstacks/config.test.mjs separately.
 Each new template needs its own business-led layout/fonts/art and OG image; do not ship the neutral
 starter as a final design. Remove `plan/` and `.claude/skills/` before publishing a gallery template once reviewed.
+
+## File ownership
+
+- `content/business.ts`: business name, tagline, introduction, phone (`phone`, `phoneE164`), emergency-line statement, email, shop address, `officeHours` (seven same-day entries), and Contact enquiry guidance.
+- `content/pricing.ts`: `callOutFees` (`standard` and `after-hours`, positive USD integers with `after-hours > standard`) and `callOutCovers` checklist.
+- `content/services.ts`: `categories` and `services` (`priceFrom`, `available`, `featured` — exactly 8 featured services for the Home manifold valve tags, `emergency` 24/7 flag).
+- `content/areas.ts`: `areas` (`zone`: `core` or `extended`, `surcharge`, and 0–100 `x`/`y` coordinates on `AreaMap`).
+- `app/**/page.tsx` and `app/not-found.tsx`: route composition, metadata, and editable page-specific headings, prose, FAQ answers, and button labels.
+- `components/` and `components/art/`: backing semantic HTML, Tailwind v4 styling, inline SVG illustrations (`HeroScene`, `TrueNorthDial`, `AreaMap`, `HeaterCutaway`, `PipeRun`, `JobTicket`, `ChevronStripe`, `NotFoundArt`, `Icon`), and client interactions (`CallOutMeter`, `CategoryFilter`, `OpenBadge`, `CopyEmail`, `JamstacksSupportForm`).
+- `app/tailwind.input.css`: light and dark ("van cab at night") palette tokens, `@theme inline` mappings, `--jamstacks-*` variables, textures, reduced-motion, and print styles.
+- `lib/routes.ts`, `lib/structured-data.ts`, `lib/rates.ts`, `lib/hours.ts`: route list for `sitemap.ts`, `Plumber` JSON-LD derived from content, and `America/Chicago` office-hours / calling-now rate calculation.
+- `site.config.json`: public site name, description, hostname, `timeZone` (`America/Chicago`), and Jamstacks integration (`siteId`, `cdnUrl`).

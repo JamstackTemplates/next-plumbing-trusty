@@ -23,6 +23,26 @@ export function validateHours(hours: readonly OpeningHours[]): void {
   }
   if (hours.length !== 7) throw new Error('hours: expected seven weekdays');
 }
+/** Local weekday index (0 = Monday) and minutes past midnight in `timeZone`, or undefined for a bad zone. */
+function localClock(timeZone: string, now: Date): { index: number; current: number } | undefined {
+  if (!timeZone) return undefined;
+  let parts: Intl.DateTimeFormatPart[];
+  try {
+    parts = new Intl.DateTimeFormat('en-US', { timeZone, weekday: 'long', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' }).formatToParts(now);
+  } catch { return undefined; }
+  const part = (type: string) => parts.find(entry => entry.type === type)?.value ?? '';
+  const index = DAYS.indexOf(part('weekday') as Day);
+  if (index < 0) return undefined;
+  return { index, current: Number(part('hour')) * 60 + Number(part('minute')) };
+}
+/** True inside an opening interval, false outside, undefined when the zone is missing or invalid. */
+export function isOpenAt(hours: readonly OpeningHours[], timeZone: string, now = new Date()): boolean | undefined {
+  validateHours(hours);
+  const clockNow = localClock(timeZone, now);
+  if (!clockNow) return undefined;
+  const today = hours.find(entry => entry.day === DAYS[clockNow.index])!;
+  return Boolean(today.opens && today.closes && clockNow.current >= minutes(today.opens) && clockNow.current < minutes(today.closes));
+}
 /** Browser callers supply the clock; build/static views never compute current availability. */
 export function openingLabel(hours: readonly OpeningHours[], timeZone: string, now = new Date()): string {
   const fallback = 'See opening hours';

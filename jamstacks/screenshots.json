@@ -1,0 +1,22 @@
+{
+  "templateId": "next-plumbing-trusty",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "fullPage": false,
+  "captures": [
+    {
+      "mode": "light",
+      "sha256": "f330231c235e998ba536a7776a98025889de975015843d148fed605c02bb094d",
+      "file": "jamstacks/home-light.jpg",
+      "bytes": 204785
+    },
+    {
+      "mode": "dark",
+      "sha256": "2c2ace74f705627ea1820693230e11b90144506911ebd9d74c565129930acc57",
+      "file": "jamstacks/home-dark.jpg",
+      "bytes": 182124
+    }
+  ]
+}
